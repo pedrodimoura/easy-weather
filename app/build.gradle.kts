@@ -58,6 +58,10 @@ dependencies {
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
 
+    implementation(libs.ktor.client.core)
+    implementation(libs.ktor.client.android)
+    implementation(libs.ktor.client.logging)
+
     implementation(project(":ui"))
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
