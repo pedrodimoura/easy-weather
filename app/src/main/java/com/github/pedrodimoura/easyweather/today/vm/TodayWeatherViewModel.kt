@@ -4,18 +4,21 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.github.pedrodimoura.easyweather.today.ui.model.TodayWeatherInformation
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 sealed interface TodayWeatherUiState {
     data object Loading : TodayWeatherUiState
     data class Success(val todayWeatherInformation: TodayWeatherInformation) : TodayWeatherUiState
 }
 
-class TodayWeatherViewModel : ViewModel() {
+@HiltViewModel
+class TodayWeatherViewModel @Inject constructor() : ViewModel() {
 
     private val _uiState = MutableStateFlow<TodayWeatherUiState>(TodayWeatherUiState.Loading)
     val uiState: StateFlow<TodayWeatherUiState> = _uiState
