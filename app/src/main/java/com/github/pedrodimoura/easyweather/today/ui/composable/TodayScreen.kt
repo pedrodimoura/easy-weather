@@ -125,7 +125,7 @@ private fun TodayScreenColdPreview() {
             TodayWeatherUiState.Success(
                 todayWeatherInformation = TodayWeatherInformation(
                     temperature = "-15°C",
-                    rawTemperature = -15,
+                    rawTemperature = -15.0,
                     dateTime = "Friday, 20 January",
                     location = "Recife, PE - Brazil",
                 )
@@ -142,7 +142,7 @@ private fun TodayScreenCoolPreview() {
             TodayWeatherUiState.Success(
                 todayWeatherInformation = TodayWeatherInformation(
                     temperature = "25°C",
-                    rawTemperature = 25,
+                    rawTemperature = 25.0,
                     dateTime = "Friday, 20 January",
                     location = "Recife, PE - Brazil",
                 )
@@ -159,7 +159,7 @@ private fun TodayScreenWarmPreview() {
             TodayWeatherUiState.Success(
                 todayWeatherInformation = TodayWeatherInformation(
                     temperature = "30°C",
-                    rawTemperature = 30,
+                    rawTemperature = 30.0,
                     dateTime = "Friday, 20 January",
                     location = "Recife, PE - Brazil",
                 )
@@ -176,7 +176,7 @@ private fun TodayScreenHotPreview() {
             TodayWeatherUiState.Success(
                 todayWeatherInformation = TodayWeatherInformation(
                     temperature = "37°C",
-                    rawTemperature = 37,
+                    rawTemperature = 37.0,
                     dateTime = "Friday, 20 January",
                     location = "Recife, PE - Brazil",
                 )
@@ -193,7 +193,7 @@ private fun TodayScreenHotterPreview() {
             TodayWeatherUiState.Success(
                 todayWeatherInformation = TodayWeatherInformation(
                     temperature = "40°C",
-                    rawTemperature = 40,
+                    rawTemperature = 40.0,
                     dateTime = "Friday, 20 January",
                     location = "Recife, PE - Brazil",
                 )
