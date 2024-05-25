@@ -20,11 +20,12 @@ object EasyWeatherUI {
         val Black = Color(0xFF1A1919)
 
         object Temperature {
-            val Cold = Color(0xFF124975)
-            val Cool = Color(0xFF389CEC)
-            val Warm = Color(0xFFF8AA36)
-            val Hot = Color(0xFFF54C5A)
-            val Hotter = Color(0xFF961616)
+            val Colder = Color(0xFF4C44AD)
+            val Cold = Color(0xFF4485AD)
+            val Cool = Color(0xFF48A9A6)
+            val Warm = Color(0xFFD4B483)
+            val Hot = Color(0xFFCB8D77)
+            val Hotter = Color(0xFFC1666B)
         }
 
         object Schemes {

@@ -30,7 +30,7 @@ fun TodayScreen(
 ) {
 
     val backgroundColor = remember {
-        mutableStateOf(EasyWeatherUI.Colors.Temperature.Cold)
+        mutableStateOf(EasyWeatherUI.Colors.Temperature.Cool)
     }
 
     val animateBackgroundColor by animateColorAsState(
@@ -93,9 +93,10 @@ fun TodayWeatherSuccessState(
 
 private fun TodayWeatherInformation.getTemperatureColor(): Color {
     return when {
+        rawTemperature < -10 -> EasyWeatherUI.Colors.Temperature.Colder
         rawTemperature < 0 -> EasyWeatherUI.Colors.Temperature.Cold
-        rawTemperature < 30 -> EasyWeatherUI.Colors.Temperature.Cool
-        rawTemperature < 37 -> EasyWeatherUI.Colors.Temperature.Warm
+        rawTemperature < 20 -> EasyWeatherUI.Colors.Temperature.Cool
+        rawTemperature < 35 -> EasyWeatherUI.Colors.Temperature.Warm
         rawTemperature < 40 -> EasyWeatherUI.Colors.Temperature.Hot
         else -> EasyWeatherUI.Colors.Temperature.Hotter
     }
@@ -119,7 +120,7 @@ private fun TodayScreenLoadingPreview() {
 
 @Preview(showBackground = true)
 @Composable
-private fun TodayScreenColdPreview() {
+private fun TodayScreenColderPreview() {
     EasyWeatherTheme {
         TodayScreen(
             TodayWeatherUiState.Success(
@@ -136,13 +137,30 @@ private fun TodayScreenColdPreview() {
 
 @Preview(showBackground = true)
 @Composable
+private fun TodayScreenColdPreview() {
+    EasyWeatherTheme {
+        TodayScreen(
+            TodayWeatherUiState.Success(
+                todayWeatherInformation = TodayWeatherInformation(
+                    temperature = "-5°C",
+                    rawTemperature = -5.0,
+                    dateTime = "Friday, 20 January",
+                    location = "Recife, PE - Brazil",
+                )
+            )
+        )
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
 private fun TodayScreenCoolPreview() {
     EasyWeatherTheme {
         TodayScreen(
             TodayWeatherUiState.Success(
                 todayWeatherInformation = TodayWeatherInformation(
-                    temperature = "25°C",
-                    rawTemperature = 25.0,
+                    temperature = "15°C",
+                    rawTemperature = 15.0,
                     dateTime = "Friday, 20 January",
                     location = "Recife, PE - Brazil",
                 )
