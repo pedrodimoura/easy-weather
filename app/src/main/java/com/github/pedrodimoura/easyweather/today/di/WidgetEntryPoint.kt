@@ -4,6 +4,7 @@ import com.github.pedrodimoura.easyweather.common.formatter.location.LocationFor
 import com.github.pedrodimoura.easyweather.common.formatter.time.DateAndTimeFormatter
 import com.github.pedrodimoura.easyweather.common.formatter.weather.WeatherFormatter
 import com.github.pedrodimoura.easyweather.common.network.ktor.KtorNetworkClient
+import com.github.pedrodimoura.easyweather.today.data.repository.TodayWeatherRepository
 import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
@@ -15,4 +16,5 @@ interface WidgetEntryPoint {
     fun weatherFormatter(): WeatherFormatter
     fun locationFormatter(): LocationFormatter
     fun dateAndTimeFormatter(): DateAndTimeFormatter
+    fun todayWeatherRepository(): TodayWeatherRepository
 }

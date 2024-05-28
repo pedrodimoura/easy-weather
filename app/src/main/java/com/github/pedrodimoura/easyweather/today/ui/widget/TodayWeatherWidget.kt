@@ -26,16 +26,13 @@ import com.github.pedrodimoura.easyweather.common.formatter.location.LocationFor
 import com.github.pedrodimoura.easyweather.common.formatter.time.DateAndTimeFormatter
 import com.github.pedrodimoura.easyweather.common.formatter.weather.TemperatureUnit
 import com.github.pedrodimoura.easyweather.common.formatter.weather.WeatherFormatter
-import com.github.pedrodimoura.easyweather.common.network.ktor.KtorNetworkClient
-import com.github.pedrodimoura.easyweather.today.data.model.TodayWeatherResponse
+import com.github.pedrodimoura.easyweather.today.data.repository.TodayWeatherRepository
 import com.github.pedrodimoura.easyweather.today.di.WidgetEntryPoint
 import com.github.pedrodimoura.easyweather.today.ui.composable.getFontColor
 import com.github.pedrodimoura.easyweather.today.ui.composable.getTemperatureColor
 import com.github.pedrodimoura.easyweather.today.ui.model.TodayWeatherInformation
 import com.github.pedrodimoura.ui.theme.EasyWeatherUI
 import dagger.hilt.android.EntryPointAccessors
-import io.ktor.client.call.body
-import io.ktor.client.request.get
 
 class TodayWeatherWidget : GlanceAppWidget() {
     override suspend fun provideGlance(context: Context, id: GlanceId) {
@@ -58,10 +55,10 @@ class TodayWeatherWidget : GlanceAppWidget() {
                 .dateAndTimeFormatter()
         }
 
-        val networkClient: KtorNetworkClient by lazy {
+        val todayWeatherRepository: TodayWeatherRepository by lazy {
             EntryPointAccessors
                 .fromApplication(context, WidgetEntryPoint::class.java)
-                .networkClient()
+                .todayWeatherRepository()
         }
 
         provideContent {
@@ -100,10 +97,7 @@ class TodayWeatherWidget : GlanceAppWidget() {
                 }
 
                 LaunchedEffect(key1 = refresh) {
-                    val weather = networkClient
-                        .httpClient
-                        .get("current.json?q=Haselhorst")
-                        .body<TodayWeatherResponse>()
+                    val weather = todayWeatherRepository.getTodayWeather("Haselhorst")
                     weatherInformation = TodayWeatherInformation(
                         temperature = weatherFormatter.getTemperature(
                             weather.current.tempC,

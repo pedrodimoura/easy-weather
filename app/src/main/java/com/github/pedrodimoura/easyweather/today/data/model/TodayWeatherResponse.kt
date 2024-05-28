@@ -19,6 +19,8 @@ data class WeatherLocation(
     val region: String,
     @SerialName("country")
     val country: String,
+    @SerialName("localtime_epoch")
+    val localtimeEpoch: Int,
     @SerialName("localtime")
     val localtime: String,
 )

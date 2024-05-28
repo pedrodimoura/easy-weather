@@ -6,12 +6,9 @@ import com.github.pedrodimoura.easyweather.common.formatter.location.LocationFor
 import com.github.pedrodimoura.easyweather.common.formatter.time.DateAndTimeFormatter
 import com.github.pedrodimoura.easyweather.common.formatter.weather.TemperatureUnit
 import com.github.pedrodimoura.easyweather.common.formatter.weather.WeatherFormatter
-import com.github.pedrodimoura.easyweather.common.network.ktor.KtorNetworkClient
-import com.github.pedrodimoura.easyweather.today.data.model.TodayWeatherResponse
+import com.github.pedrodimoura.easyweather.today.data.repository.TodayWeatherRepository
 import com.github.pedrodimoura.easyweather.today.ui.model.TodayWeatherInformation
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.ktor.client.call.body
-import io.ktor.client.request.get
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
@@ -30,7 +27,7 @@ sealed interface TodayWeatherActivityAction {
 
 @HiltViewModel
 class TodayWeatherViewModel @Inject constructor(
-    private val ktorNetworkClient: KtorNetworkClient,
+    private val todayWeatherRepository: TodayWeatherRepository,
     private val dateAndTimeFormatter: DateAndTimeFormatter,
     private val weatherFormatter: WeatherFormatter,
     private val locationFormatter: LocationFormatter,
@@ -46,10 +43,7 @@ class TodayWeatherViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             runCatching {
-                ktorNetworkClient
-                    .httpClient
-                    .get("current.json?q=Haselhorst")
-                    .body<TodayWeatherResponse>()
+                todayWeatherRepository.getTodayWeather(location = "Haselhorst")
             }.onSuccess { todayWeatherResponse ->
                 _uiState.update {
                     TodayWeatherUiState.Success(
