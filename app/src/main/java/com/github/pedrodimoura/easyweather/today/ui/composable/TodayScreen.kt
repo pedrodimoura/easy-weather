@@ -91,7 +91,7 @@ fun TodayWeatherSuccessState(
     )
 }
 
-private fun TodayWeatherInformation.getTemperatureColor(): Color {
+internal fun TodayWeatherInformation.getTemperatureColor(): Color {
     return when {
         rawTemperature < -10 -> EasyWeatherUI.Colors.Temperature.Colder
         rawTemperature < 0 -> EasyWeatherUI.Colors.Temperature.Cold
@@ -102,7 +102,7 @@ private fun TodayWeatherInformation.getTemperatureColor(): Color {
     }
 }
 
-private fun TodayWeatherInformation.getFontColor(): Color {
+internal fun TodayWeatherInformation.getFontColor(): Color {
     return when {
         rawTemperature < 30 -> EasyWeatherUI.Colors.White
         rawTemperature < 40 -> EasyWeatherUI.Colors.Black

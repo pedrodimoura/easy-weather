@@ -54,6 +54,10 @@ dependencies {
     api(libs.androidx.ui.tooling.preview)
     api(libs.androidx.material3)
 
+    // Glance
+    api(libs.glance.appwidget)
+    api(libs.glance.material3)
+
     // Compose
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
