@@ -7,7 +7,7 @@ import io.ktor.client.call.body
 import io.ktor.client.request.get
 import javax.inject.Inject
 
-class TodayWeatherRepositoryImpl @Inject constructor(
+internal class TodayWeatherRepositoryImpl @Inject constructor(
     private val networkClient: KtorNetworkClient,
 ) : TodayWeatherRepository {
 

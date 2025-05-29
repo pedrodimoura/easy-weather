@@ -17,7 +17,7 @@ import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 import javax.inject.Inject
 
-class KtorNetworkClientImpl @Inject constructor() : KtorNetworkClient {
+internal class KtorNetworkClientImpl @Inject constructor() : KtorNetworkClient {
 
     override val httpClient: HttpClient by lazy {
         HttpClient(Android) {

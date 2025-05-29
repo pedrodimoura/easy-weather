@@ -14,7 +14,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-interface HiltFormatterModule {
+internal interface HiltFormatterModule {
 
     @Binds
     @Singleton

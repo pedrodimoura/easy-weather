@@ -34,7 +34,7 @@ import com.github.pedrodimoura.easyweather.today.ui.model.TodayWeatherInformatio
 import com.github.pedrodimoura.ui.theme.EasyWeatherUI
 import dagger.hilt.android.EntryPointAccessors
 
-class TodayWeatherWidget : GlanceAppWidget() {
+internal class TodayWeatherWidget : GlanceAppWidget() {
     override suspend fun provideGlance(context: Context, id: GlanceId) {
 
         val weatherFormatter: WeatherFormatter by lazy {

@@ -24,7 +24,7 @@ import com.github.pedrodimoura.ui.theme.EasyWeatherTheme
 import com.github.pedrodimoura.ui.theme.EasyWeatherUI
 
 @Composable
-fun TodayScreen(
+internal fun TodayScreen(
     uiState: TodayWeatherUiState,
     modifier: Modifier = Modifier,
 ) {
@@ -62,14 +62,14 @@ fun TodayScreen(
 }
 
 @Composable
-fun TodayWeatherLoadingState() {
+internal fun TodayWeatherLoadingState() {
     CircularProgressIndicator(
         color = EasyWeatherUI.Colors.White,
     )
 }
 
 @Composable
-fun TodayWeatherSuccessState(
+internal fun TodayWeatherSuccessState(
     todayWeatherInformation: TodayWeatherInformation,
     backgroundColor: MutableState<Color>,
 ) {

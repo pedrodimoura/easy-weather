@@ -3,7 +3,7 @@ package com.github.pedrodimoura.easyweather.common.formatter.location
 import java.util.Locale
 import javax.inject.Inject
 
-class LocationFormatterImpl @Inject constructor() : LocationFormatter {
+internal class LocationFormatterImpl @Inject constructor() : LocationFormatter {
     override fun format(location: String, region: String, country: String): String {
         return "$location, $region - ${getCountryCode(country)}"
     }
