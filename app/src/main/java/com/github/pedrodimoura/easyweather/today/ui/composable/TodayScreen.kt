@@ -7,6 +7,8 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -42,7 +44,7 @@ internal fun TodayScreen(
         label = "animateBackgroundColor",
     )
 
-    Column(
+    LazyColumn(
         modifier = modifier
             .fillMaxSize()
             .background(animateBackgroundColor),
@@ -50,45 +52,47 @@ internal fun TodayScreen(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         when (uiState) {
-            is TodayWeatherUiState.Loading -> TodayWeatherLoadingState()
-            is TodayWeatherUiState.Success -> {
-                TodayWeatherSuccessState(
-                    todayWeatherInformation = uiState.todayWeatherInformation,
-                    backgroundColor = backgroundColor,
-                )
-            }
+            is TodayWeatherUiState.Loading -> composeTodayWeatherLoadingState()
+            is TodayWeatherUiState.Success -> composeTodayWeatherSuccessState(
+                todayWeatherInformation = uiState.todayWeatherInformation,
+                backgroundColor = backgroundColor,
+            )
         }
     }
 }
 
-@Composable
-internal fun TodayWeatherLoadingState() {
-    CircularProgressIndicator(
-        color = EasyWeatherUI.Colors.White,
-    )
+internal fun LazyListScope.composeTodayWeatherLoadingState() {
+    item(key = "loading") {
+        CircularProgressIndicator(
+            color = EasyWeatherUI.Colors.White,
+        )
+    }
 }
 
-@Composable
-internal fun TodayWeatherSuccessState(
+internal fun LazyListScope.composeTodayWeatherSuccessState(
     todayWeatherInformation: TodayWeatherInformation,
     backgroundColor: MutableState<Color>,
 ) {
     backgroundColor.value = todayWeatherInformation.getTemperatureColor()
-    Text(
-        text = todayWeatherInformation.dateTime,
-        style = EasyWeatherUI.Typography.defaults.bodySmall,
-        color = todayWeatherInformation.getFontColor(),
-    )
-    Text(
-        text = todayWeatherInformation.temperature,
-        style = EasyWeatherUI.Typography.defaults.displayLarge,
-        color = todayWeatherInformation.getFontColor(),
-    )
-    Text(
-        text = todayWeatherInformation.location,
-        style = EasyWeatherUI.Typography.defaults.labelSmall,
-        color = todayWeatherInformation.getFontColor(),
-    )
+    item(key = "todayWeatherInformation") {
+        Column {
+            Text(
+                text = todayWeatherInformation.dateTime,
+                style = EasyWeatherUI.Typography.defaults.bodySmall,
+                color = todayWeatherInformation.getFontColor(),
+            )
+            Text(
+                text = todayWeatherInformation.temperature,
+                style = EasyWeatherUI.Typography.defaults.displayLarge,
+                color = todayWeatherInformation.getFontColor(),
+            )
+            Text(
+                text = todayWeatherInformation.location,
+                style = EasyWeatherUI.Typography.defaults.labelSmall,
+                color = todayWeatherInformation.getFontColor(),
+            )
+        }
+    }
 }
 
 internal fun TodayWeatherInformation.getTemperatureColor(): Color {
